@@ -21,3 +21,49 @@ hellos
 
 type Room = { name: string; number: int }
 let room = { name = "bang"; number = 12 }
+
+let rec iterate f value =
+    seq {
+        yield value
+        yield! iterate f (f value)
+    }
+
+let result = Seq.take 10 (iterate ((*) 2) 1)
+printfn "%A" result
+
+// types
+let tryParseTuple intStr =
+    try
+        let i = System.Int32.Parse intStr
+        (true, i)
+    with
+    | _ -> (false, 0)
+
+type tryParseResult = { success: bool; value: int }
+
+let tryParseRecord intStr =
+    try
+        let i = System.Int32.Parse intStr
+        { success = true; value = i }
+    with
+    | _ -> { success = false; value = 0 }
+
+let tryParseOption intStr =
+    try
+        let i = System.Int32.Parse intStr
+        Some i
+    with
+    | _ -> None
+
+tryParseTuple "99" |> printfn("%A")
+tryParseRecord "99"|> printfn("%A")
+tryParseOption "99"|> printfn("%A")
+
+tryParseTuple "abc"|> printfn("%A")
+tryParseRecord "abc"|> printfn("%A")
+tryParseOption "abc"|> printfn("%A")
+
+type ColorUnion = Red | Blue | Violet
+type ColorEnum = Red = 0 | Yellow = 1 | Violet =2
+let red = Red
+let blue = ColorEnum.Yellow // must qualified
