@@ -57,3 +57,11 @@ module DefiningGenericClasses =
         let mutable states = [ initalElement ]
         member this.UpdateState newState = states <- newState :: states
         member this.History = states
+
+// implementing interfaces
+type ReadFile() =
+    let file = new System.IO.StreamReader("readme.txt")
+    member _.ReadLine() = file.ReadLine();
+    // this class's implementation of IDisposable members
+    interface System.IDisposable with
+        member _.Dispose() = file.Close()
