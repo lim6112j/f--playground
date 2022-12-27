@@ -3,6 +3,8 @@ namespace MyApp
 
 open StringManipulation
 open Tuples
+open DefiningClasses
+open DefiningGenericClasses
 
 module Program =
     let prefix (prefixStr: string) (baseStr: string) = prefixStr + " , " + baseStr
@@ -111,3 +113,9 @@ module Program =
     printfn "blackSquares in chess board : %A" Lists.blackSquares.Head
     printfn "square of numList items : %A" Lists.squares
     printfn "sum of filtered numList : %A" Lists.sumOfSquaresUpTo
+    // defining class
+    printfn "Length of vector1 : %f  Length of vector2 : %f " vector1.Length vector2.Length
+    // defining Generic class
+    let tracker = StateTracker 10
+    tracker.UpdateState 17
+    printfn "tracker history : %A" tracker.History

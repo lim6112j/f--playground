@@ -40,3 +40,20 @@ module Lists =
 
     let sumOfSquaresUpTo =
         numberList |> List.filter (fun x -> x % 3 = 0) |> List.sumBy (fun x -> x * x)
+
+module DefiningClasses =
+    type Vector2D(dx: float, dy: float) =
+        let length = sqrt (dx * dx + dy * dy)
+        member this.DX = dx
+        member this.DY = dy
+        member this.Length = length
+        member this.Scale(k) = Vector2D(k * this.DX, k * this.DY)
+
+    let vector1 = Vector2D(3.0, 4.0)
+    let vector2 = vector1.Scale(10.0)
+
+module DefiningGenericClasses =
+    type StateTracker<'T>(initalElement: 'T) =
+        let mutable states = [ initalElement ]
+        member this.UpdateState newState = states <- newState :: states
+        member this.History = states
