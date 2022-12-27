@@ -35,3 +35,8 @@ module Lists =
               for j in 0..7 do
                   if (i + j) % 2 = 1 then
                       yield (i, j) ]
+
+    let squares = numberList |> List.map (fun x -> x * x)
+
+    let sumOfSquaresUpTo =
+        numberList |> List.filter (fun x -> x % 3 = 0) |> List.sumBy (fun x -> x * x)

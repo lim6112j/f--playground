@@ -109,3 +109,5 @@ module Program =
     // outside module StringManipulation's Lists
     printfn "daysInYear : %A" Lists.dayList.Head
     printfn "blackSquares in chess board : %A" Lists.blackSquares.Head
+    printfn "square of numList items : %A" Lists.squares
+    printfn "sum of filtered numList : %A" Lists.sumOfSquaresUpTo
