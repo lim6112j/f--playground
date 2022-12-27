@@ -1,5 +1,9 @@
 ﻿// For more information see https://aka.ms/fsharp-console-apps
 namespace MyApp
+
+open StringManipulation
+open Tuples
+
 module Program =
     let prefix (prefixStr: string) (baseStr: string) = prefixStr + " , " + baseStr
     let names = [ "David"; "Maria"; "Alex" ]
@@ -9,7 +13,7 @@ module Program =
 
     let hellos =
         //|> Seq.map prefixPartial
-//|> Seq.map exclaim
+        //|> Seq.map exclaim
         names
         |> Seq.map (fun x ->
             printfn "mapped over %s" x
@@ -39,8 +43,8 @@ module Program =
         try
             let i = System.Int32.Parse intStr
             (true, i)
-        with
-        | _ -> (false, 0)
+        with _ ->
+            (false, 0)
 
     type tryParseResult = { success: bool; value: int }
 
@@ -48,15 +52,15 @@ module Program =
         try
             let i = System.Int32.Parse intStr
             { success = true; value = i }
-        with
-        | _ -> { success = false; value = 0 }
+        with _ ->
+            { success = false; value = 0 }
 
     let tryParseOption intStr =
         try
             let i = System.Int32.Parse intStr
             Some i
-        with
-        | _ -> None
+        with _ ->
+            None
 
     tryParseTuple "99" |> printfn ("%A")
     tryParseRecord "99" |> printfn ("%A")
@@ -90,7 +94,18 @@ module Program =
             for i in 0..10..100 do
                 yield seq { i..1 .. i + 9 }
         }
+
     let result1 = withYieldBang |> Seq.take 20 |> Seq.toList
     let result2 = withYield |> Seq.take 3
     printfn "%A" result1
     printfn "%A" result2
+    // outside module StringManipulation's variable
+    printfn "%A" string1
+    printfn "%s" helloworld
+    printfn "%s" substring
+    // outside module StringManipulation's tuples
+    printfn "The result of swapping (1, 2) is %A" (swapElems (1, 2))
+    printfn "tuple1: %A tuple2: %A" tuple1 tuple2
+    // outside module StringManipulation's Lists
+    printfn "daysInYear : %A" Lists.dayList.Head
+    printfn "blackSquares in chess board : %A" Lists.blackSquares.Head
