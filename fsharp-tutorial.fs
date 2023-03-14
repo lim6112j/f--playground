@@ -82,7 +82,7 @@ module ActivePattern =
       | DivisibleBy 3 -> "Fizz"
       | DivisibleBy 5 -> "buzz"
       | i -> string i
-module classes =
+module Classes =
   type Vector(x: float, y: float) =
     let mag = sqrt(x*x + y*y)
     member this.X = x

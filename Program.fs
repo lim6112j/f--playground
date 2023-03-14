@@ -6,6 +6,7 @@ open Tuples
 open DefiningClasses
 open DefiningGenericClasses
 open ActivePattern
+open Classes
 
 module Program =
     let prefix (prefixStr: string) (baseStr: string) = prefixStr + " , " + baseStr
@@ -122,3 +123,8 @@ module Program =
     printfn "tracker history : %A" tracker.History
     // active pattern
     printfn "%s" (fizzbuzz 15)
+    // classes
+    let vector = Vector(1.1,2.2)    
+    let vector2 = Vector(1.1,2.2)
+    let vectorPlus = vector + vector2
+    printfn "vector1 + vector2 : vetor(%f, %f)" vectorPlus.X vectorPlus.Y
