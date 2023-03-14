@@ -65,3 +65,30 @@ type ReadFile() =
     // this class's implementation of IDisposable members
     interface System.IDisposable with
         member _.Dispose() = file.Close()
+
+module ActivePattern =
+    // active pattern
+    let (|Even|Odd|) i =
+      if i % 2 = 0 then Even else Odd
+    let testNumber i =
+      match i with
+      | Even -> printfn "%d is even" i
+      | Odd -> printfn "%d is odd" i
+    testNumber 2
+    let (|DivisibleBy|_|) by n =
+      if n % by = 0 then Some DivisibleBy else None
+    let fizzbuzz = function
+      | DivisibleBy 3 & DivisibleBy 5 -> "Fizzbuzz"
+      | DivisibleBy 3 -> "Fizz"
+      | DivisibleBy 5 -> "buzz"
+      | i -> string i
+module classes =
+  type Vector(x: float, y: float) =
+    let mag = sqrt(x*x + y*y)
+    member this.X = x
+    member this.Y = y
+    member this.Mag = mag
+    member this.Scale(s) =
+      Vector(x*s, y*s)
+    static member (+) (a: Vector, b: Vector) =
+      Vector(a.X + b.X, a.Y + b.Y)

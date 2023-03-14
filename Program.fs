@@ -5,6 +5,7 @@ open StringManipulation
 open Tuples
 open DefiningClasses
 open DefiningGenericClasses
+open ActivePattern
 
 module Program =
     let prefix (prefixStr: string) (baseStr: string) = prefixStr + " , " + baseStr
@@ -119,3 +120,5 @@ module Program =
     let tracker = StateTracker 10
     tracker.UpdateState 17
     printfn "tracker history : %A" tracker.History
+    // active pattern
+    printfn "%s" (fizzbuzz 15)
